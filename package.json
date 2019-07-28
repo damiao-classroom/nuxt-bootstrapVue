@@ -1,0 +1,22 @@
+{
+  "name": "dadjokes",
+  "version": "1.0.0",
+  "description": "My fabulous Nuxt.js project",
+  "author": "damiao-classroom",
+  "private": true,
+  "scripts": {
+    "dev": "nuxt",
+    "build": "nuxt build",
+    "start": "nuxt start",
+    "generate": "nuxt generate"
+  },
+  "dependencies": {
+    "axios": "^0.19.0",
+    "bootstrap-vue": "^2.0.0-rc.27",
+    "iview": "^3.1.5",
+    "nuxt": "^2.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.9"
+  }
+}
