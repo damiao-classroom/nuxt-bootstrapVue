@@ -18,8 +18,8 @@
         :caption="it.caption"
         :text="it.text"
         :img-src="it.img"
-        v-for="it,index in sliders"
-        :key="index"
+        v-for="(it,index) in sliders"
+        v-bind:key="index"
       ></b-carousel-slide>
       
     </b-carousel>
@@ -31,7 +31,7 @@
     <div class="card-info">
 
       <b-card-group deck v-if="jokes.length > 0">
-        <b-card v-for="it,index in jokes" :key="index">
+        <b-card v-for="(it,index) in jokes" :key="index">
           <b-card-text>{{ it }}</b-card-text>
         </b-card>
       </b-card-group>
@@ -73,33 +73,43 @@ export default {
       }]
     }
   },
-  async created(){
+  async asyncData(context){
     const config = {
       headers: {
         Accept: 'application/json'
       }
     };
-
-    const res = await axios.get('https://icanhazdadjoke.com/search?limit=10', config)
-    this.jokes = res.data.results.map(v => v.joke)
+    const res = await axios.get('http://localhost:3002/jokes?_limit=20', config)
+    let jokes = res.data.map(v => v.joke)
+    return { jokes }
   },
+  // async created(){
+  //   const config = {
+  //     headers: {
+  //       Accept: 'application/json'
+  //     }
+  //   };
+
+  //   const res = await axios.get('https://icanhazdadjoke.com/search?limit=10', config)
+  //   this.jokes = res.data.results.map(v => v.joke)
+  // },
   components: { },
 
 }
 </script>
 
 <style scoped>
-.content-page {
-  margin: 0;
-  width:100%;
-}
-.index-title{
-  height: 80px; line-height: 80px;
-}
-.card-info{
-  width: 92%; margin: 0 auto; margin-bottom: 30px;
-}
-.spinner-box{
- display: block; margin: 0 auto; margin-top: 50px;
-}
+  .content-page {
+    margin: 0;
+    width:100%;
+  }
+  .index-title{
+    height: 80px; line-height: 80px;
+  }
+  .card-info{
+    width: 92%; margin: 0 auto; margin-bottom: 30px;
+  }
+  .spinner-box{
+  display: block; margin: 0 auto; margin-top: 50px;
+  }
 </style>
